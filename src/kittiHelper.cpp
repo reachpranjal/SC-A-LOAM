@@ -74,7 +74,7 @@ int main(int argc, char** argv)
     rosbag::Bag bag_out;
     if (to_bag)
         bag_out.open(output_bag_file, rosbag::bagmode::Write);
-    
+
     Eigen::Matrix3d R_transform;
     R_transform << 0, 0, 1, -1, 0, 0, 0, -1, 0;
     Eigen::Quaterniond q_transform(R_transform);
@@ -88,9 +88,9 @@ int main(int argc, char** argv)
         float timestamp = stof(line);
         std::stringstream left_image_path, right_image_path;
         left_image_path << dataset_folder << "sequences/" + sequence_number + "/image_0/" << std::setfill('0') << std::setw(6) << line_num << ".png";
-        cv::Mat left_image = cv::imread(left_image_path.str(), CV_LOAD_IMAGE_GRAYSCALE);
+        cv::Mat left_image = cv::imread(left_image_path.str(), cv::IMREAD_GRAYSCALE);
         right_image_path << dataset_folder << "sequences/" + sequence_number + "/image_1/" << std::setfill('0') << std::setw(6) << line_num << ".png";
-        cv::Mat right_image = cv::imread(left_image_path.str(), CV_LOAD_IMAGE_GRAYSCALE);
+        cv::Mat right_image = cv::imread(left_image_path.str(), cv::IMREAD_GRAYSCALE);
 
         std::getline(ground_truth_file, line);
         std::stringstream pose_stream(line);
@@ -129,7 +129,7 @@ int main(int argc, char** argv)
 
         // read lidar point cloud
         std::stringstream lidar_data_path;
-        lidar_data_path << dataset_folder << "velodyne/sequences/" + sequence_number + "/velodyne/" 
+        lidar_data_path << dataset_folder << "velodyne/sequences/" + sequence_number + "/velodyne/"
                         << std::setfill('0') << std::setw(6) << line_num << ".bin";
         std::vector<float> lidar_data = read_lidar_data(lidar_data_path.str());
         std::cout << "totally " << lidar_data.size() / 4.0 << " points in this lidar frame \n";

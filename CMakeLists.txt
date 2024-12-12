@@ -29,7 +29,7 @@ find_package(GTSAM REQUIRED QUIET)
 
 include_directories(
   include
-	${catkin_INCLUDE_DIRS} 
+	${catkin_INCLUDE_DIRS}
 	${PCL_INCLUDE_DIRS}
   ${CERES_INCLUDE_DIRS}
   ${OpenCV_INCLUDE_DIRS}
@@ -38,13 +38,13 @@ include_directories(
 
 catkin_package(
   CATKIN_DEPENDS geometry_msgs nav_msgs roscpp rospy std_msgs
-  DEPENDS EIGEN3 PCL 
+  DEPENDS EIGEN3 PCL
   INCLUDE_DIRS include
 )
 
 
 add_executable(ascanRegistration src/scanRegistration.cpp)
-target_link_libraries(ascanRegistration ${catkin_LIBRARIES} ${PCL_LIBRARIES})
+target_link_libraries(ascanRegistration ${catkin_LIBRARIES} ${PCL_LIBRARIES} ${OpenCV_LIBRARIES})
 
 add_executable(alaserOdometry src/laserOdometry.cpp)
 target_link_libraries(alaserOdometry ${catkin_LIBRARIES} ${PCL_LIBRARIES} ${CERES_LIBRARIES})
@@ -52,14 +52,14 @@ target_link_libraries(alaserOdometry ${catkin_LIBRARIES} ${PCL_LIBRARIES} ${CERE
 add_executable(alaserMapping src/laserMapping.cpp)
 target_link_libraries(alaserMapping ${catkin_LIBRARIES} ${PCL_LIBRARIES} ${CERES_LIBRARIES})
 
-add_executable(alaserPGO 
+add_executable(alaserPGO
   src/laserPosegraphOptimization.cpp
   include/scancontext/Scancontext.cpp
 )
-target_compile_options(alaserPGO 
+target_compile_options(alaserPGO
   PRIVATE ${OpenMP_CXX_FLAGS}
 )
-target_link_libraries(alaserPGO 
+target_link_libraries(alaserPGO
   ${catkin_LIBRARIES} ${PCL_LIBRARIES} ${CERES_LIBRARIES}
   ${OpenMP_CXX_FLAGS}
   gtsam
