@@ -1,5 +1,28 @@
 # SC-A-LOAM
 
+## Update
+
+1. Clone and Setup
+   
+   ```
+   cd ~/catkin_ws/src/
+   git lfs clone https://github.com/reachpranjal/SC-A-LOAM.git
+   cd ..
+   catkin_make
+   ```
+
+2. Launch (KITTI example scan)
+   
+   ```
+   rosbag play kitti_2011_09_29_drive_0071_synced.bag
+   
+   roslaunch aloam_velodyne aloam_velodyne_HDL_64.launch pcd_topic:=/kitti/velo/pointcloud
+   ```
+
+   You should now see scans and poses saved to `SC-A-LOAM/output/`
+   
+   ![](picture/kitti_2011_09_26_0104.png)
+
 ## News
 - ``2021-07-16``: This repository's easy-to-use plug-and-play loop detection and pose graph optimization module (named [SC-PGO](https://github.com/gisbi-kim/SC-A-LOAM/blob/main/src/laserPosegraphOptimization.cpp)) is also integrated with FAST-LIO2! see [FAST_LIO_SLAM](https://github.com/gisbi-kim/FAST_LIO_SLAM).
 
