@@ -44,7 +44,7 @@ catkin_package(
 
 
 add_executable(ascanRegistration src/scanRegistration.cpp)
-target_link_libraries(ascanRegistration ${catkin_LIBRARIES} ${PCL_LIBRARIES} ${OpenCV_LIBRARIES})
+target_link_libraries(ascanRegistration ${catkin_LIBRARIES} ${PCL_LIBRARIES})
 
 add_executable(alaserOdometry src/laserOdometry.cpp)
 target_link_libraries(alaserOdometry ${catkin_LIBRARIES} ${PCL_LIBRARIES} ${CERES_LIBRARIES})
@@ -69,5 +69,21 @@ add_executable(kittiHelper src/kittiHelper.cpp)
 target_link_libraries(kittiHelper ${catkin_LIBRARIES} ${PCL_LIBRARIES} ${OpenCV_LIBS})
 
 
+# Add this after the kittiHelper executable definition
 
+add_executable(lidar_localization
+    src/lidarLocalization.cpp
+    include/scancontext/Scancontext.cpp  # Include Scancontext.cpp directly
+)
 
+target_compile_options(lidar_localization
+    PRIVATE ${OpenMP_CXX_FLAGS}
+)
+
+target_link_libraries(lidar_localization
+    ${catkin_LIBRARIES}
+    ${PCL_LIBRARIES}
+    ${CERES_LIBRARIES}
+    ${OpenMP_CXX_FLAGS}
+    gtsam
+)

@@ -1,0 +1,28 @@
+<launch>
+    <arg name="pcd_topic" default="/kitti/velo/pointcloud" doc="input point cloud topic"/>
+    <arg name="map_dir" default="$(find aloam_velodyne)/output" doc="directory containing built map"/>
+
+    <param name="scan_line" type="int" value="64" />
+    <param name="minimum_range" type="double" value="5"/>
+    <param name="lidar_type" type="string" value="HDL64"/>
+
+    <param name="mapping_line_resolution" type="double" value="0.4"/>
+    <param name="mapping_plane_resolution" type="double" value="0.8"/>
+
+    <node pkg="aloam_velodyne" type="lidar_localization" name="lidar_localization" output="screen">
+        <param name="map_directory" type="string" value="$(arg map_dir)"/>
+        <param name="map_viz_filter_size" type="double" value="0.4"/>
+    </node>
+
+    <remap from="/velodyne_points" to="$(arg pcd_topic)"/>
+
+    <node pkg="aloam_velodyne" type="ascanRegistration" name="ascanRegistration" output="screen" />
+    <node pkg="aloam_velodyne" type="alaserOdometry" name="alaserOdometry" output="screen" />
+
+    <arg name="rviz" default="true" />
+    <group if="$(arg rviz)">
+        <node launch-prefix="nice" pkg="rviz" type="rviz" name="rviz"
+              args="-d $(find aloam_velodyne)/rviz_cfg/aloam_velodyne.rviz" />
+    </group>
+
+</launch>
