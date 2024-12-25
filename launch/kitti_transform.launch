@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<launch>
+    <arg name="transform_config" default="$(find aloam_velodyne)/config/kitti_transform.yaml"/>
+
+    <node pkg="aloam_velodyne" type="kittiTransformBroadcaster" name="kittiTransformBroadcaster" output="screen">
+        <param name="transform_config" value="$(arg transform_config)"/>
+    </node>
+</launch>

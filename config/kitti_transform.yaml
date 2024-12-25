@@ -1,0 +1,80 @@
+# Static transforms for KITTI dataset sequence
+transforms:
+  base_to_imu:
+    frame_id: "base_link"
+    child_frame_id: "imu_link"
+    translation:
+      x: -1.405
+      y: 0.32
+      z: 0.93
+    rotation:
+      x: 0.0
+      y: 0.0
+      z: 0.0
+      w: 1.0
+
+  imu_to_velo:
+    frame_id: "imu_link"
+    child_frame_id: "velo_link"
+    translation:
+      x: 0.8105439034864795
+      y: -0.30705435920607715
+      z: 0.8027240582768985
+    rotation:
+      x: -0.007412088004638236
+      y: 0.0010150864862642243
+      z: 0.000385188259497205
+      w: 0.999971937106237
+
+  cameras:
+    camera_gray_left:
+      frame_id: "imu_link"
+      child_frame_id: "camera_gray_left"
+      translation:
+        x: 1.083301912483793
+        y: -0.30988887278502864
+        z: 0.729919834550793
+      rotation:
+        x: -0.49920863559366935
+        y: 0.49657270183611535
+        z: -0.5029076838733983
+        w: 0.5012884651770674
+
+    camera_gray_right:
+      frame_id: "imu_link"
+      child_frame_id: "camera_gray_right"
+      translation:
+        x: 1.083838390132825
+        y: -0.8470342947594516
+        z: 0.7322077622110083
+      rotation:
+        x: -0.49920863559366935
+        y: 0.49657270183611535
+        z: -0.5029076838733983
+        w: 0.5012884651770674
+
+    camera_color_left:
+      frame_id: "imu_link"
+      child_frame_id: "camera_color_left"
+      translation:
+        x: 1.0832398213649874
+        y: -0.24772046694030597
+        z: 0.7296550332334871
+      rotation:
+        x: -0.49920863559366935
+        y: 0.49657270183611535
+        z: -0.5029076838733983
+        w: 0.5012884651770674
+
+    camera_color_right:
+      frame_id: "imu_link"
+      child_frame_id: "camera_color_right"
+      translation:
+        x: 1.0837718793975146
+        y: -0.7804407711548085
+        z: 0.7319241124610277
+      rotation:
+        x: -0.49920863559366935
+        y: 0.49657270183611535
+        z: -0.5029076838733983
+        w: 0.5012884651770674

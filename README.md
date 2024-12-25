@@ -4,6 +4,7 @@
 
 - [x] Minor fixes and example KITTI scan added
 - [x] Added Localization node following same optimization approach and feature-based strategy as A-LOAM
+- [x] Added KITTI Static Transform  
 
 1. Clone and Setup
    
@@ -19,15 +20,15 @@
    ```
    rosbag play kitti_2011_09_29_drive_0104_synced.bag
    
-   roslaunch aloam_velodyne aloam_velodyne_HDL_64.launch pcd_topic:=/kitti/velo/pointcloud
+   roslaunch aloam_velodyne mapping.launch pcd_topic:=/kitti/velo/pointcloud save_dir:=$(rospack find aloam_velodyne)/kitti_map
    ```
 
-   You should now see scans and poses saved to `SC-A-LOAM/output/`
+   You should now see scans and poses saved to `SC-A-LOAM/kitti_map/`
 
 3. Localization
    
    ```
-   roslaunch aloam_velodyne localization.launch
+   roslaunch aloam_velodyne localization.launch map_dir:=$(rospack find aloam_velodyne)/kitti_map
    ```
 
    ![](picture/kitti_2011_09_26_0104.gif)

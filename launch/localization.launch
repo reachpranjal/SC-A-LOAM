@@ -1,4 +1,6 @@
 <launch>
+    <include file="$(find aloam_velodyne)/launch/kitti_transform.launch"/>
+
     <arg name="pcd_topic" default="/kitti/velo/pointcloud" doc="input point cloud topic"/>
     <arg name="map_dir" default="$(find aloam_velodyne)/output" doc="directory containing built map"/>
 

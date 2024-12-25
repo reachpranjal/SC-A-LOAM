@@ -1,2 +1,6 @@
-output/
+kitti_map/
+output*/
 *.bk
+
+*.vscode
+*.git
